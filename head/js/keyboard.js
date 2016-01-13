@@ -22,7 +22,7 @@ var changeSizeOfLabels = function() {
 	    total += idToScore[key];
 	}
 	for (var key in idToScore) {
-		var width = idToScore[key] * 88.0 / total + "%";
+		var width = idToScore[key] * 86.0 / total + "%";
 	    var id = key.replace("_score", "");
 	    $('#' + id).width(width);
 	}

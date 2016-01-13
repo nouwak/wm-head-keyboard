@@ -7,10 +7,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service("letterService")
 @Transactional
@@ -18,6 +15,7 @@ public class LetterServiceImpl implements LetterService {
 
 
     private static Map<Character, Map<Character, Integer>> letterOccurrences = new HashMap<>();
+    private static List<Character> POLISH_CHARACTERS = Arrays.asList('Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż');
 
     static {
         initLetterStatistics();
@@ -25,8 +23,8 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public void addLetterOccurrence(Character firstLetter, Character secondLetter) {
-        firstLetter=substituteLetter(firstLetter);
-        secondLetter=substituteLetter(secondLetter);
+        firstLetter = substituteLetter(firstLetter);
+        secondLetter = substituteLetter(secondLetter);
         addOccurenceToMap(firstLetter, secondLetter);
     }
 
@@ -51,7 +49,7 @@ public class LetterServiceImpl implements LetterService {
 
     private static void initLetterStatistics() {
         try {
-            URL resourceUrl = LetterServiceImpl.class.getResource("/manhunt.txt");
+            URL resourceUrl = LetterServiceImpl.class.getResource("/pap-mini.txt");
             File resourceFile = new File(resourceUrl.toURI());
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(resourceFile), StandardCharsets.UTF_8));
             String line;
@@ -88,7 +86,7 @@ public class LetterServiceImpl implements LetterService {
 
     private static void addOccurences(String line) {
         if (!line.startsWith("#")) {
-            String upperLine = line.toUpperCase();
+            String upperLine = line.toUpperCase(new Locale("pl"));
             for (int i = 0; i < upperLine.length() - 1; i++) {
                 char c1 = upperLine.charAt(i);
                 char c2 = upperLine.charAt(i + 1);
@@ -121,7 +119,7 @@ public class LetterServiceImpl implements LetterService {
     }
 
     private static boolean letterValid(Character l1) {
-        return Character.isLetter(l1) || l1.equals(' ');
+        return Character.isLetter(l1) || POLISH_CHARACTERS.contains(l1) || l1.equals(' ');
     }
 
 }

@@ -17,13 +17,20 @@ var handleNextCharacters = function (req, res) {
     if (pre_last_letter == ' ') {
         pre_last_letter = '_';
     }
-    request('http://localhost:8080/nlp-service/probability/get/' + last_letter,
+    request({
+            url: 'http://localhost:8080/nlp-service/probability/get',
+            method: 'POST',
+            json: true,
+            headers: {
+                'content-type': 'application/json'
+            }, body: {l1: last_letter}
+        },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 //console.log(body)
-                var probability_map = JSON.parse(body);
+                var probability_map = body;
                 var letterToScore = {};
-                var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ".split("");
+                var alphabet = "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ ".split("");
                 alphabet.forEach(function (letter) {
                     var letter_probability = 0.0;
                     if (probability_map.hasOwnProperty(letter)) {
@@ -42,14 +49,27 @@ var handleNextCharacters = function (req, res) {
             }
         });
     if (pre_last_letter) {
-        request.post('http://localhost:8080/nlp-service/probability/add/' + pre_last_letter + '/' + last_letter,
+        request({
+                url: 'http://localhost:8080/nlp-service/probability/add',
+                method: 'POST',
+                json: true,
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: {
+                    l1: pre_last_letter,
+                    l2: last_letter
+                }
+            },
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     console.log(body);
                 } else {
                     console.log(error);
                 }
-            });
+            }
+        )
+        ;
     }
 
 }

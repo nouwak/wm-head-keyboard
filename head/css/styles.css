@@ -34,7 +34,7 @@ body {
 }
 .keyboard .letters .letter, .keyboard .letter_scores .letter_score {
     text-align: center;
-	width: calc(90% / 27);
+	width: calc(90% / 36);
 
 	vertical-align: bottom;
     display: inline-block;
