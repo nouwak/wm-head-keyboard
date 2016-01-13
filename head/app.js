@@ -18,7 +18,7 @@ var handleNextCharacters = function (req, res) {
         pre_last_letter = '_';
     }
     request({
-            url: 'http://localhost:8080/nlp-service/probability/get',
+            url: 'http://localhost:8080/nlp/probability/get',
             method: 'POST',
             json: true,
             headers: {
@@ -50,7 +50,7 @@ var handleNextCharacters = function (req, res) {
         });
     if (pre_last_letter) {
         request({
-                url: 'http://localhost:8080/nlp-service/probability/add',
+                url: 'http://localhost:8080/nlp/probability/add',
                 method: 'POST',
                 json: true,
                 headers: {
