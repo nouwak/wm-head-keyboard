@@ -1,0 +1,67 @@
+body {
+	margin: 0px;
+	background: url('../images/bg.jpg');
+}
+.keyboard {
+    position: absolute;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20px;
+    height: 500px;
+    bottom: 0px;
+    border: solid 1px gray;
+    padding: 1%;
+
+	border-radius: 2px;
+
+	background-color: #E2E2E2;
+	overflow: hidden;
+}
+
+.keyboard .letters, .keyboard .letter_scores {
+    display: table-cell;
+    position: absolute;
+    width: 98%;
+}
+
+.keyboard .letters {
+    bottom: 40px;
+}
+
+.keyboard .letter_scores {
+    bottom: 0px;
+}
+.keyboard .letters .letter, .keyboard .letter_scores .letter_score {
+    text-align: center;
+	width: calc(90% / 27);
+
+	vertical-align: bottom;
+    display: inline-block;
+}
+
+.keyboard .letters .letter {
+	border: 1px solid rgba(74, 41, 41, 0.19);
+}
+
+.keyboard .letter_scores .letter_score { 
+}
+
+input#typed_text {
+	width: 100%;
+	height: 40px;
+}
+
+.line {
+	width: 100%;
+	position: relative;
+	top: 100px;
+	border-top: 1px dashed gray;
+}
+
+#target {
+	position: absolute !important;
+	overflow: hidden;
+	transition: top 0.1s ease, left 0.1s ease;	
+
+}
