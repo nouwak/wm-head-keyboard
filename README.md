@@ -9,3 +9,7 @@ $> node app.js
 
 == To launch app in browser:
 localhost:8081
+
+== Available language versions:
+- main branch - English - corpus for statistics is 'Manhunt' by Richard MacAndrew
+- branch 'polish' - Polish - corpus for statistics is a collection of news by PAP (Państwowa Agencja Prasowa)
